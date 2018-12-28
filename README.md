@@ -1,1 +1,1 @@
-CursoBluuweb
+Repositorio siguiendo el curso de Vue.js - Bluuweb.
