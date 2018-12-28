@@ -7,17 +7,48 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
-    <script src="/componentes/padre.js"></script>
-    <script src="/componentes/hijo.js"></script>
+    <script src="https://unpkg.com/vuex@3.0.1/dist/vuex.js"></script>
 </head>
 <body>
     <div id="app">
-        <padre></padre>
+        <titulo></titulo>
     </div>
 
     <script>
+        Vue.component('titulo',{
+            template: //html
+            `
+            <div>
+                <h1>numero {{ $store.state.numero }}</h1>
+                <hijo></hijo>
+            </div>
+            `
+        });
+
+        Vue.component('hijo', {
+            template: //html
+            `
+            <div>
+                <button @click="$store.commit('aumentar')">+</button>
+                <h1>numero {{ $store.state.numero }}</h1>
+            </div>
+            `
+        });
+
+        const store = new Vuex.Store({
+            state:{
+                numero: 10
+            },
+            mutations: {
+                aumentar(state){
+                    state.numero++;
+                }
+            }
+        });
+
         new Vue({
-            el: '#app'
+            el: '#app',
+            store: store
         });
     </script>
 </body>
